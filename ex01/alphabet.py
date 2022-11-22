@@ -33,7 +33,7 @@ def kaitou(ans_lst):
         print("正解です。それでは、具体的に欠損文字を1つずつ入力してください")
         count=len(n)
         for i in range(count):
-            ans2=input(f"{i+1}つ目の文字を入力してください")
+            ans2=input(f"{i+1}つ目の文字を入力してください:")
             if ans2 in n:
                 n.remove(ans2)
             else:
@@ -46,5 +46,4 @@ def kaitou(ans_lst):
         print("不正解です。またチャレンジしてください")
 
 if __name__ == "__main__":
-    ans_lst=shutudai()
-    kaitou(ans_lst)
+    kaitou(shutudai())
