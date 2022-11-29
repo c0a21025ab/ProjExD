@@ -13,27 +13,31 @@ entry.grid(row = 0,column=0, columnspan = 3)
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    if txt == "=":
-        siki = entry.get()
-        ans = eval(siki)
-        entry.delete(0,tk.END)
-        entry.insert(tk.END,ans)
-    elif txt == "C":
-        mozi = len(entry.get())-1
-        entry.delete(mozi,tk.END)
-    elif txt == "AC":
-        entry.delete(0,tk.END)
-    elif txt == "1000+":
-        p = entry.get()
-        pa = eval(p)
-        pb = pa
-        while pb // 1000 == 0:
-            pb += pa
-        entry.delete(0,tk.END)
-        entry.insert(tk.END,pb)
+    try:
+        if txt == "=":
+            siki = entry.get()
+            ans = eval(siki)
+            entry.delete(0,tk.END)
+            entry.insert(tk.END,ans)
+        elif txt == "C":
+            mozi = len(entry.get())-1
+            entry.delete(mozi,tk.END)
+        elif txt == "AC":
+            entry.delete(0,tk.END)
+        elif txt == "1000+":
+            p = entry.get()
+            pa = eval(p)
+            pb = pa
+            while pb // 1000 == 0:
+                pb += pa
+            entry.delete(0,tk.END)
+            entry.insert(tk.END,pb)
 
-    else:
-        entry.insert(tk.END,txt)
+        else:
+            entry.insert(tk.END,txt)
+    except:
+        entry.delete(0,tk.end)
+        entry.insert(tk.END,"Error")
 
 num_list=[n for n in range(10)]
 
