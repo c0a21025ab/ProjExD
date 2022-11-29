@@ -15,8 +15,7 @@ def button_click(event):
     txt = btn["text"]
     try:
         if txt == "=":
-            siki = entry.get()
-            ans = eval(siki)
+            ans = eval(entry.get())
             entry.delete(0,tk.END)
             entry.insert(tk.END,ans)
         elif txt == "C":
