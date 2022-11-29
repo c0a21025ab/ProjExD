@@ -13,6 +13,7 @@ entry.grid(row = 0,column=0, columnspan = 3)
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
+    entry.insert(tk.END,txt)
     tkm.showinfo("効果",f"{txt}のボタンがクリックされました")
 
 num_list=[n for n in range(10)]
