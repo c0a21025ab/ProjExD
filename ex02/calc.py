@@ -24,13 +24,13 @@ def button_click(event):
         elif txt == "AC":
             entry.delete(0,tk.END)
         elif txt == "1000+":
-            p = entry.get()
-            pa = eval(p)
-            pb = pa
-            while pb // 1000 == 0:
-                pb += pa
+            num = entry.get()
+            ans_num = eval(num)
+            ans_num_add = ans_num
+            while ans_num_add // 1000 == 0:
+                ans_num_add += ans_num
             entry.delete(0,tk.END)
-            entry.insert(tk.END,pb)
+            entry.insert(tk.END,ans_num_add)
 
         else:
             entry.insert(tk.END,txt)
