@@ -13,7 +13,13 @@ entry.grid(row = 0,column=0, columnspan = 3)
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    entry.insert(tk.END,txt)
+    if txt == "=":
+        siki = entry.get()
+        ans = eval(siki)
+        entry.delete(0,tk.END)
+        entry.insert(tk.END,ans)
+    else:
+        entry.insert(tk.END,txt)
     tkm.showinfo("効果",f"{txt}のボタンがクリックされました")
 
 num_list=[n for n in range(10)]
@@ -31,9 +37,11 @@ for num in num_list:
         button.grid(row = 4 - math.ceil(num/3), column = 1)
 
 button = tk.Button(root, text ="+",font = ("",30),width = 4,height = 2)
+button.bind("<1>", button_click)
 button.grid(row = 4, column = 1)
 
 button = tk.Button(root, text="=", font=("",30),width = 4,height = 2)
+button.bind("<1>", button_click)
 button.grid(row = 4, column = 2)
 root.mainloop()
 
