@@ -3,8 +3,8 @@ import tkinter.messagebox as tkm
 import math
 
 root = tk.Tk()
-root.title("電卓っぽいな")
-root.geometry("400x500")
+root.title("電卓っぽいもの")
+root.geometry("380x410")
 
 entry = tk.Entry(root, width=10, font=("",40),justify="right")
 entry.grid(row = 0,column=0, columnspan = 3)
@@ -53,23 +53,23 @@ for num in num_list:
     elif num % 3 == 2:
         button.grid(row = 4 - math.ceil(num/3), column = 1)
 
-button = tk.Button(root, text ="+",font = ("",30),width = 4,height = 1)
+button = tk.Button(root, text ="+",font = ("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>", button_click)
 button.grid(row = 1, column = 3)
 
-button = tk.Button(root, text="=", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="=", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>", button_click)
 button.grid(row = 4, column = 2)
 
-button = tk.Button(root, text="-", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="-", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>", button_click)
 button.grid(row = 2, column = 3)
 
-button = tk.Button(root, text="*", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="*", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>", button_click)
 button.grid(row = 3, column = 3)
 
-button = tk.Button(root, text="/", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="/", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>", button_click)
 button.grid(row = 4, column = 3)
 
@@ -77,19 +77,19 @@ button = tk.Button(root, text="00", font=("",30),width = 4,height = 1)
 button.bind("<1>",button_click)
 button.grid(row = 4, column = 1)
 
-button = tk.Button(root, text="AC", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="AC", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>",button_click)
 button.grid(row = 5, column = 0)
 
-button = tk.Button(root, text="C", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="C", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>",button_click)
 button.grid(row = 5, column = 1)
 
-button = tk.Button(root, text="**", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="**", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>",button_click)
 button.grid(row = 5, column = 2)
 
-button = tk.Button(root, text="1000+", font=("",30),width = 4,height = 1)
+button = tk.Button(root, text="1000+", font=("",30),width = 4,height = 1,bg="#a9a9a9")
 button.bind("<1>",button_click)
 button.grid(row = 5, column = 3)
 
