@@ -1,5 +1,5 @@
 import tkinter as tk
-import maze_maker
+import maze_maker as mm
 import tkinter.messagebox as tkm
 
 def key_down(event):
@@ -33,10 +33,10 @@ def goal():
         tkm.showinfo("goal","たどり着きました")
         #canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
         #canvas.pack()
-        maze_list = maze_maker.make_maze(15,9)
+        maze_list = mm.make_maze(15,9)
         mx, my = 1,1
         cx , cy = mx * 100 +50 , my * 100 + 50
-        maze_maker.show_maze(canvas, maze_list)
+        mm.show_maze(canvas, maze_list)
         #image = tk.PhotoImage(file="fig/3.png")
         canvas.delete("ざんねんな鳥")
         canvas.create_image(cx,cy,image=image, 
@@ -54,10 +54,10 @@ if __name__ == "__main__":
 
     canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
     canvas.pack()
-    maze_list = maze_maker.make_maze(15,9)
+    maze_list = mm.make_maze(15,9)
     mx, my = 1,1
     cx , cy = mx * 100 +50 , my * 100 + 50
-    maze_maker.show_maze(canvas, maze_list)
+    mm.show_maze(canvas, maze_list)
     image = tk.PhotoImage(file="fig/3.png")
     canvas.create_image(cx,cy,image=image, 
                         tag="ざんねんな鳥")
