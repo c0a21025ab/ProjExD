@@ -31,13 +31,10 @@ def goal():
     global mx, my, maze_list, cx, cy
     if mx == 13 and my == 7:
         tkm.showinfo("goal","たどり着きました")
-        #canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
-        #canvas.pack()
         maze_list = mm.make_maze(15,9)
         mx, my = 1,1
         cx , cy = mx * 100 +50 , my * 100 + 50
         mm.show_maze(canvas, maze_list)
-        #image = tk.PhotoImage(file="fig/3.png")
         canvas.delete("ざんねんな鳥")
         canvas.create_image(cx,cy,image=image, 
                           tag="ざんねんな鳥")
