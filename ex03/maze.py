@@ -10,30 +10,35 @@ def key_up(event):
     key =""
 
 def main_proc():
-    global cx, cy
-    if key == "Up":
-        cy -= 20
-    if key == "Down":
-        cy += 20
-    if key == "Left":
-        cx -= 20
-    if key == "Right":
-        cx += 20
+    global mx, my
+    if key == "Up":my -= 1
+    if key == "Down":my += 1
+    if key == "Left":mx -= 1
+    if key == "Right":mx += 1
+    if maze_list[mx][my] == 1:
+        if key == "Up":my += 1
+        if key == "Down":my -= 1
+        if key == "Left":mx += 1
+        if key == "Right":mx -= 1
+    cx , cy = mx * 100 +50 , my * 100 + 50
     canvas.coords("koukaton",cx, cy)
     root.after(100,main_proc)
 
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")
+
     canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
+    canvas.pack()
+    maze_list = maze_maker.make_maze(15,9)
+    mx, my = 1,1
+    cx , cy = mx * 100 +50 , my * 100 + 50
+    maze_maker.show_maze(canvas, maze_list)
     image = tk.PhotoImage(file="fig/3.png")
-    cx, cy = 300, 400
     canvas.create_image(cx,cy,image=image, 
                         tag="koukaton")
-    canvas.pack()
     key = ""
     root.bind("<KeyPress>",key_down)
     root.bind("<KeyRelease>",key_up)
     main_proc()
-    maze_maker.make_maze(15,9)
     root.mainloop()
