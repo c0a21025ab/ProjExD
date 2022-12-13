@@ -35,13 +35,13 @@ def main():
     scrn_sfc.blit(bomb_sfc, bomb_rct)
     wx,wy = +1,+1
 
-    bomb1_sfc = pg.Surface((20,20))
-    bomb1_sfc.set_colorkey((0,0,0))
-    pg.draw.circle(bomb1_sfc, (255,0,0), (10,10),10)
-    bomb1_rct = bomb1_sfc.get_rect()
-    bomb1_rct.centerx = random.randint(0,scrn_rct.width)
-    bomb1_rct.centery = random.randint(0,scrn_rct.height)
-    scrn_sfc.blit(bomb1_sfc, bomb1_rct)
+    bomb2_sfc = pg.Surface((20,20))
+    bomb2_sfc.set_colorkey((0,0,0))
+    pg.draw.circle(bomb2_sfc, (255,0,0), (10,10),10)
+    bomb2_rct = bomb2_sfc.get_rect()
+    bomb2_rct.centerx = random.randint(0,scrn_rct.width)
+    bomb2_rct.centery = random.randint(0,scrn_rct.height)
+    scrn_sfc.blit(bomb2_sfc, bomb2_rct)
     vx,vy = +1,+1
 
     while True:
@@ -70,9 +70,9 @@ def main():
         wx *= yoko
         wy *= tate
 
-        bomb1_rct.move_ip(vx,vy)
-        scrn_sfc.blit(bomb1_sfc, bomb1_rct)
-        yoko1,tate1 = check_bound(bomb1_rct, scrn_rct)
+        bomb2_rct.move_ip(vx,vy)
+        scrn_sfc.blit(bomb2_sfc, bomb2_rct)
+        yoko1,tate1 = check_bound(bomb2_rct, scrn_rct)
         vx *= yoko1
         vy *= tate1
 
@@ -81,7 +81,7 @@ def main():
         if tori_rct.colliderect(bomb_rct):
             return
         
-        if tori_rct.colliderect(bomb1_rct):
+        if tori_rct.colliderect(bomb2_rct):
             return
 
 
