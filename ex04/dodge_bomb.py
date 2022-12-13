@@ -3,6 +3,7 @@ import sys
 
 def main():
     clock = pg.time.Clock()
+
     pg.display.set_caption("逃げろ！こうかとん")
     scrn_sfc = pg.display.set_mode((1600,900))
     pg_bg_sfc = pg.image.load("fig/pg_bg.jpg")
@@ -19,6 +20,17 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
+        
+        key_dct = pg.key.get_pressed()
+        if key_dct[pg.K_UP]:
+            tori_rct.centery -= 1
+        if key_dct[pg.K_DOWN]:
+            tori_rct.centery += 1
+        if key_dct[pg.K_LEFT]:
+            tori_rct.centerx -= 1
+        if key_dct[pg.K_RIGHT]:
+            tori_rct.centerx += 1
+        scrn_sfc.blit(tori_sfc, tori_rct)
         
         pg.display.update()
         clock.tick(1000)
