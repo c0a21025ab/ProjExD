@@ -8,6 +8,12 @@ def main():
     pg_bg_sfc = pg.image.load("fig/pg_bg.jpg")
     pg_bg_rct = pg_bg_sfc.get_rect()
 
+    tori_sfc = pg.image.load("fig/6.png")
+    tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
+    tori_rct = tori_sfc.get_rect()
+    tori_rct.center = 900,300
+    scrn_sfc.blit(tori_sfc, tori_rct)
+
     while True:
         scrn_sfc.blit(pg_bg_sfc, pg_bg_rct)
         for event in pg.event.get():
