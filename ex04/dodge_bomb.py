@@ -12,6 +12,7 @@ def check_bound(obj_rct, scr_rct):
 
 def main():
     clock = pg.time.Clock()
+    font = pg.font.Font(None, 55)               # フォントの設定(55px)
 
     pg.display.set_caption("逃げろ！こうかとん")
     scrn_sfc = pg.display.set_mode((1600,900))
@@ -32,6 +33,15 @@ def main():
     bomb_rct.centerx = random.randint(0,scrn_rct.width)
     bomb_rct.centery = random.randint(0,scrn_rct.height)
     scrn_sfc.blit(bomb_sfc, bomb_rct)
+    wx,wy = +1,+1
+
+    bomb1_sfc = pg.Surface((20,20))
+    bomb1_sfc.set_colorkey((0,0,0))
+    pg.draw.circle(bomb1_sfc, (255,0,0), (10,10),10)
+    bomb1_rct = bomb1_sfc.get_rect()
+    bomb1_rct.centerx = random.randint(0,scrn_rct.width)
+    bomb1_rct.centery = random.randint(0,scrn_rct.height)
+    scrn_sfc.blit(bomb1_sfc, bomb1_rct)
     vx,vy = +1,+1
 
     while True:
@@ -41,34 +51,41 @@ def main():
                 return
         
         key_dct = pg.key.get_pressed()
-        if key_dct[pg.K_UP]:
-            tori_rct.centery -= 1
-        if key_dct[pg.K_DOWN]:
-            tori_rct.centery += 1
-        if key_dct[pg.K_LEFT]:
-            tori_rct.centerx -= 1
-        if key_dct[pg.K_RIGHT]:
-            tori_rct.centerx += 1
-        if check_bound(bomb_rct, scrn_rct) != (+1,+1):
-            if key_dct[pg.K_UP]:
-                tori_rct.centery += 1
-            if key_dct[pg.K_DOWN]:
-                tori_rct.centery -= 1
-            if key_dct[pg.K_LEFT]:
-                tori_rct.centerx += 1
-            if key_dct[pg.K_RIGHT]:
-                tori_rct.centerx -= 1
+        if key_dct[pg.K_UP]:tori_rct.centery -= 1
+        if key_dct[pg.K_DOWN]:tori_rct.centery += 1
+        if key_dct[pg.K_LEFT]:tori_rct.centerx -= 1
+        if key_dct[pg.K_RIGHT]:tori_rct.centerx += 1
+
+        if check_bound(tori_rct, scrn_rct) != (+1,+1):
+            if key_dct[pg.K_UP]:tori_rct.centery += 1
+            if key_dct[pg.K_DOWN]:tori_rct.centery -= 1
+            if key_dct[pg.K_LEFT]:tori_rct.centerx += 1
+            if key_dct[pg.K_RIGHT]:tori_rct.centerx -= 1
+
         scrn_sfc.blit(tori_sfc, tori_rct)
         
         #vx,vy = +1,+1
-        bomb_rct.move_ip(vx,vy)
+
+        bomb_rct.move_ip(wx,wy)
         scrn_sfc.blit(bomb_sfc, bomb_rct)
         yoko,tate = check_bound(bomb_rct, scrn_rct)
-        vx *= yoko
-        vy *= tate
+        wx *= yoko
+        wy *= tate
+
+        bomb1_rct.move_ip(vx,vy)
+        scrn_sfc.blit(bomb1_sfc, bomb1_rct)
+        yoko1,tate1 = check_bound(bomb1_rct, scrn_rct)
+        vx *= yoko1
+        vy *= tate1
+
+        
 
         if tori_rct.colliderect(bomb_rct):
             return
+        
+        if tori_rct.colliderect(bomb1_rct):
+            return
+
 
         pg.display.update()
         clock.tick(1000)
