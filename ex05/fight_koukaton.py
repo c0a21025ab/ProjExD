@@ -64,13 +64,7 @@ def main():
                 else:
                     main()
                     return
-                    
-
-
         
-        #if kkt.rct.colliderect(bkd.rct):
-            #return
-
         pg.display.update()
         clock.tick(1000)
 
