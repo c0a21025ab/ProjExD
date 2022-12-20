@@ -45,9 +45,7 @@ def main():
             if event.type == pg.QUIT:
                 return
 
-        fonto = pg.font.Font(None,80)
-        txt = fonto.render(f"{life}", True, (0,0,0))
-        scr.sfc.blit(txt, (10,10))
+        Moji(80,(0,0,0), (10,10), f"{life}",scr)
 
         kkt.update(scr)
         #bkd.update(scr)
@@ -58,9 +56,7 @@ def main():
                 life -= 1
                 print(life)
                 if life == 0:
-                    fonto1 = pg.font.Font(None,160)
-                    txt1 = fonto1.render("GAME OVER", True, (0,0,0))
-                    scr.sfc.blit(txt1, (450,380))
+                    Moji(160,(0,0,0), (450,380), "GAME OVER",scr)
                     pg.display.update()
                     time.sleep(2)
                     return
@@ -77,6 +73,13 @@ def main():
 
         pg.display.update()
         clock.tick(1000)
+
+class Moji():
+    def __init__(self, size, color, xy,txts,scr):
+        fonto = pg.font.Font(None,size)#160
+        txt = fonto.render(txts, True, color)#gameover (0,0,0)
+        scr.sfc.blit(txt, xy)#450,380
+
 
 class Screen():
     def __init__(self, title, wh, img_path):
