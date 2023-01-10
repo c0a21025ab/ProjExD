@@ -19,12 +19,13 @@ def check_bound(obj_rct, scr_rct):
 
 
 def main():
-    global life, move
+    global life, move, time_sta, time_end
     
     clock =pg.time.Clock()
-    scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
+    scr = Screen("いいからくたばれ！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     kkt = Bird("fig/6.png", 2.0, (900,400))
+    time_sta = time.time()
     kkt.update(scr)
 
     #bkd = Bomb((255,0,0),10,(+1,+1),scr)
@@ -34,9 +35,10 @@ def main():
 
     for i in range(8):
         color = "red"
-        vx = random.choice([-1, +1])
-        vy = random.choice([-1, +1])
-        bombs.append(Bomb(color, 10, (vx,vy),scr))
+        vx = random.choice([-3, -2, -1, +1, +2, +3])#爆弾横方向のスピードの調節
+        vy = random.choice([-3, -2, -1, +1, +2, +3])#爆弾縦方向のスピードの調節
+        vz = random.choice([10, 20])
+        bombs.append(Bomb(color, vz, (vx,vy),scr))
     # 練習２
     while True:
         scr.blit()
@@ -45,34 +47,40 @@ def main():
             if event.type == pg.QUIT:
                 return
 
-        Moji(80,(0,0,0), (10,10), f"{life}",scr)
+        Moji(80,(0,0,0), None,(10,10), f"{life}",scr)
 
         kkt.update(scr)
         #bkd.update(scr)
         for bomb in bombs:
             bomb.update(scr)
             if kkt.rct.colliderect(bomb.rct):
-                move += 1
-                life -= 1
-                print(life)
-                if life == 0:
-                    Moji(160,(0,0,0), (450,380), "GAME OVER",scr)
-                    pg.display.update()
-                    time.sleep(2)
-                    return
-                        
+                time_end = time.time()
+                if time_end-time_sta <= 1:#ゲーム開始後1秒以内の無敵時間
+                    continue
                 else:
-                    main()
-                    return
+                    move += 1
+                    life -= 1
+                    if life == 0:
+                        Moji(160,(0,0,0), None,(450,380), "GAME OVER",scr)#GAMEOVERの表示
+                        pg.display.update()
+                        time.sleep(2)
+                        return
+                            
+                    else:
+                        Moji(160,(0,0,0), "ipaexg.ttf",(600,380), "痛っ",scr)#痛みを訴える表示
+                        pg.display.update()
+                        time.sleep(1)
+                        main()
+                        return
         
         pg.display.update()
         clock.tick(1000)
 
 class Moji():
-    def __init__(self, size, color, xy,txts,scr):
-        fonto = pg.font.Font(None,size)#160
-        txt = fonto.render(txts, True, color)#gameover (0,0,0)
-        scr.sfc.blit(txt, xy)#450,380
+    def __init__(self, size, color, font, xy,txts,scr):
+        fonto = pg.font.Font(font,size)
+        txt = fonto.render(txts, True, color)
+        scr.sfc.blit(txt, xy)
 
 
 class Screen():
@@ -90,10 +98,10 @@ class Screen():
 
 class Bird():
     key_delta = {
-        pg.K_UP:    [0, -1],
-        pg.K_DOWN:  [0, +1],
-        pg.K_LEFT:  [-1, 0],
-        pg.K_RIGHT: [+1, 0],
+        pg.K_UP:    [0, -2],
+        pg.K_DOWN:  [0, +2],
+        pg.K_LEFT:  [-2, 0],
+        pg.K_RIGHT: [+2, 0],
     }
 
     def __init__(self, img_path, ratio, xy):
@@ -136,20 +144,7 @@ class Bomb():
         self.vx *= yoko
         self.vy *= tate
         self.blit(scr)
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
+        
 if __name__ == "__main__":
     life = 5
     move = 0
